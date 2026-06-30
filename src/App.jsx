@@ -2,6 +2,8 @@ import { useMemo, useState } from "react"
 import "./App.css"
 import SearchBar from "./components/SearchBar"
 import ProductTable from "./components/ProductTable"
+import InventorySummary from "./components/InventorySummary"
+import { getInventoryStatus } from "./utils/inventoryStatus"
 
 const products = [
   {
@@ -11,7 +13,7 @@ const products = [
     brand: "Blackmagic Design",
     price: 345,
     stockQuantity: 3,
-    lowStockThreashold: 5,
+    lowStockThreshold: 5,
   },
   {
     id: 2,
@@ -20,7 +22,7 @@ const products = [
     brand: "Shure",
     price: 439,
     stockQuantity: 12,
-    lowStockThreashold: 5,
+    lowStockThreshold: 5,
   },
   {
     id: 3,
@@ -29,7 +31,16 @@ const products = [
     brand: "Pioneer DJ",
     price: 3292,
     stockQuantity: 0,
-    lowStockThreashold: 5,
+    lowStockThreshold: 5,
+  },
+  {
+    id: 4,
+    title: "AKG P120 General Purpose Recording Microphone",
+    sku: "AKG-MIC-P120",
+    brand: "AKG",
+    price: 129,
+    stockQuantity: 4,
+    lowStockThreshold: 5,
   },
 ]
 
@@ -52,21 +63,44 @@ function App() {
     })
   }, [searchValue])
 
+  const inventorySummary = useMemo(() => {
+    return filteredProducts.reduce(
+      (summary, product) => {
+        const status = getInventoryStatus(product)
+
+        summary.totalProducts += 1
+        summary[status] += 1
+
+        return summary
+      },
+      {
+        totalProducts: 0,
+        inStock: 0,
+        lowStock: 0,
+        outOfStock: 0,
+      },
+    )
+  }, [filteredProducts])
+
   return (
     <main className='app'>
       <section className='dashboard' aria-labelledby='dashboard-title'>
         <div className='dashboard__header'>
+          <div>
             <p className='dashboard__eyebrow'>eCommerce Admin</p>
             <h1 id='dashboard-title'>Inventory Dashboard</h1>
             <p className='dashboard__description'>
               Search products, monitor stock levels, and identify low-stock or
               out-of-stock items.
             </p>
+          </div>
         </div>
+
+        <InventorySummary summary={inventorySummary} />
 
         <SearchBar searchValue={searchValue} onSearchChange={setSearchValue} />
 
-        <div className='dashboard__count' area-label='Visible product count'>
+        <div className='dashboard__count' aria-label='Visible product count'>
           <span>{filteredProducts.length} </span>
           <small>
             {filteredProducts.length === 1 ? "Product" : "Products"}

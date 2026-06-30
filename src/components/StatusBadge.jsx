@@ -1,25 +1,26 @@
-function getInventoryStatus(stockQuantity, lowStockThreshold) {
-  if (stockQuantity === 0) {
-    return "Out of stock"
-  }
+import { getInventoryStatus } from "../utils/inventoryStatus"
 
-  if (stockQuantity <= lowStockThreshold) {
-    return "Low Stock"
-  }
-
-  return "In Stock"
+const statusConfig = {
+  inStock: {
+    label: "In Stock",
+    className: "status-badge--in-stock",
+  },
+  lowStock: {
+    label: "Low Stock",
+    className: "status-badge--low-stock",
+  },
+  outOfStock: {
+    label: "Out of Stock",
+    className: "status-badge--out-of-stock",
+  },
 }
 
-function StatusBadge({ stockQuantity, lowStockThreshold }) {
-  const status = getInventoryStatus(stockQuantity, lowStockThreshold)
+function StatusBadge({ product }) {
+  const status = getInventoryStatus(product)
 
-  const statusClassName = status.toLowerCase().replaceAll(" ", "-")
+  const currentStatus = statusConfig[status]
 
-  return (
-    <span className={`status-badge status-badge--${statusClassName}`}>
-      {status}
-    </span>
-  )
+  return <span className={currentStatus.className}>{currentStatus.label}</span>
 }
 
 export default StatusBadge

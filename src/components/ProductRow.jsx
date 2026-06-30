@@ -1,10 +1,12 @@
 import StatusBadge from "./StatusBadge"
 
+const priceFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+})
+
 function ProductRow({ product }) {
-  const formattedPrice = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(product.price)
+  const formattedPrice = priceFormatter.format(product.price)
 
   return (
     <tr>
@@ -16,10 +18,7 @@ function ProductRow({ product }) {
       <td>{formattedPrice}</td>
       <td>{product.stockQuantity}</td>
       <td>
-        <StatusBadge
-          stockQuantity={product.stockQuantity}
-          lowStockThreashold={product.lowStockThreshold}
-        />
+        <StatusBadge product={ product } />
       </td>
     </tr>
   )

@@ -24,6 +24,7 @@ input {
   padding: 2.5rem 1.25rem;
 }
 
+/* Dashboard */
 .dashboard {
   width: 100%;
   margin: 0 auto;
@@ -87,6 +88,38 @@ input {
   font-weight: 600;
 }
 
+/* Inventory Summary Section */
+.inventory-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.summary-card {
+  padding: 1.25rem;
+  border: 1px solid #d9e2ec;
+  border-radius: 0.9rem;
+  background-color: #ffffff;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.summary-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.summary-value {
+  display: block;
+  color: #0f172a;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+/* Search Bar Section */
 .search-bar {
   margin-bottom: 1.375rem;
 }
@@ -113,6 +146,8 @@ input {
   border-color: #f26a21;
 }
 
+
+/* Product Table */
 .table-wrapper {
   overflow-x: auto;
   border: 1px solid #dfe5eb;
@@ -204,5 +239,15 @@ input {
 
   .dashboard__count {
     width: 100%;
+  }
+
+  .inventory-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .inventory-summary {
+    grid-template-columns: 1fr;
   }
 }
