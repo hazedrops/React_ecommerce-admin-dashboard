@@ -3,6 +3,7 @@ import "./App.css"
 import SearchBar from "./components/SearchBar"
 import ProductTable from "./components/ProductTable"
 import InventorySummary from "./components/InventorySummary"
+import StatusFilter from "./components/StatusFilter"
 import { getInventoryStatus } from "./utils/inventoryStatus"
 
 const products = [
@@ -46,22 +47,26 @@ const products = [
 
 function App() {
   const [searchValue, setSearchValue] = useState("")
+  const [selectedStatus, setSelectedStatus] = useState("all")
 
   const filteredProducts = useMemo(() => {
     const normalizedSearch = searchValue.trim().toLowerCase()
-
-    if (!normalizedSearch) {
-      return products
-    }
-
+    
     return products.filter((product) => {
-      return (
+      const matchesSearch = 
+        !normalizedSearch ||
         product.title.toLowerCase().includes(normalizedSearch) ||
         product.sku.toLowerCase().includes(normalizedSearch) ||
         product.brand.toLowerCase().includes(normalizedSearch)
-      )
+
+      const productStatus = getInventoryStatus(product)
+
+      const matchesStatus = 
+        selectedStatus === "all" || productStatus === selectedStatus
+      
+        return matchesSearch && matchesStatus
     })
-  }, [searchValue])
+  }, [searchValue, selectedStatus])
 
   const inventorySummary = useMemo(() => {
     return filteredProducts.reduce(
@@ -99,6 +104,12 @@ function App() {
         <InventorySummary summary={inventorySummary} />
 
         <SearchBar searchValue={searchValue} onSearchChange={setSearchValue} />
+
+        <StatusFilter 
+          selectedStatus={selectedStatus} 
+          onStatusChange={setSelectedStatus} 
+        />
+        
 
         <div className='dashboard__count' aria-label='Visible product count'>
           <span>{filteredProducts.length} </span>
