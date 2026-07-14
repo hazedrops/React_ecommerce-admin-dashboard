@@ -49,6 +49,13 @@ function App() {
   const [searchValue, setSearchValue] = useState("")
   const [selectedStatus, setSelectedStatus] = useState("all")
 
+  const hasActiveFilters = searchValue.trim() !== "" || selectedStatus !== "all"
+
+  function handleClearFilters() {
+    setSearchValue("")
+    setSelectedStatus("all")
+  }
+
   const filteredProducts = useMemo(() => {
     const normalizedSearch = searchValue.trim().toLowerCase()
     
@@ -105,11 +112,22 @@ function App() {
 
         <SearchBar searchValue={searchValue} onSearchChange={setSearchValue} />
 
-        <StatusFilter 
-          selectedStatus={selectedStatus} 
-          onStatusChange={setSelectedStatus} 
-        />
-        
+        <div className='filter-toolbar'>
+          <StatusFilter 
+            selectedStatus={selectedStatus} 
+            onStatusChange={setSelectedStatus} 
+          />
+
+          { hasActiveFilters && (
+            <button
+              type='button'
+              className='clear-filters-button'
+              onClick={ handleClearFilters }
+            >
+              Clear filters
+            </button>
+          ) }
+        </div>        
 
         <div className='dashboard__count' aria-label='Visible product count'>
           <span>{filteredProducts.length} </span>
