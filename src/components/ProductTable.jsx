@@ -1,10 +1,24 @@
 import ProductRow from "./ProductRow"
 
-function ProductTable({ products }) {
+function ProductTable({ products, hasActiveFilters, onClearFilters }) {
   if (products.length === 0) {
     return (
       <div className='empty-state' role='status'>
-        No products matched your search.
+        <h2 className='empty-state__title'>No products matched your search.</h2>
+
+        <p className='empty-state__message'>
+          Try changing your search or selecting a different stock status.
+        </p>
+
+        {hasActiveFilters && (
+          <button
+            type='button'
+            className='empty-state__button'
+            onClick={onClearFilters}
+          >
+            Clear filters
+          </button>
+        )}
       </div>
     )
   }
