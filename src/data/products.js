@@ -1,0 +1,38 @@
+export const products = [
+  {
+    id: 1,
+    title: "Blackmagic Design ATEM Mini Pro",
+    sku: "BMD-BMDSWATEMMINIBPR",
+    brand: "Blackmagic Design",
+    price: 345,
+    stockQuantity: 3,
+    lowStockThreshold: 5,
+  },
+  {
+    id: 2,
+    title: "Shure SM7B Dynamic Microphone",
+    sku: "SHU-MIC-SM7B",
+    brand: "Shure",
+    price: 439,
+    stockQuantity: 12,
+    lowStockThreshold: 5,
+  },
+  {
+    id: 3,
+    title: "Pioneer DJ DDJ-FLX4 Controller",
+    sku: "PION-DDJFLX4",
+    brand: "Pioneer DJ",
+    price: 3292,
+    stockQuantity: 0,
+    lowStockThreshold: 5,
+  },
+  {
+    id: 4,
+    title: "AKG P120 General Purpose Recording Microphone",
+    sku: "AKG-MIC-P120",
+    brand: "AKG",
+    price: 129,
+    stockQuantity: 4,
+    lowStockThreshold: 5,
+  },
+]
