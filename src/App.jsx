@@ -118,7 +118,7 @@ function App() {
             onStatusChange={setSelectedStatus} 
           />
 
-          { hasActiveFilters && (
+          { hasActiveFilters && filteredProducts.length > 0 && (
             <button
               type='button'
               className='clear-filters-button'
@@ -136,7 +136,11 @@ function App() {
           </small>
         </div>
 
-        <ProductTable products={filteredProducts} />
+        <ProductTable 
+          products={filteredProducts} 
+          hasActiveFilters={hasActiveFilters}
+          onClearFilters={handleClearFilters}  
+        />
       </section>
     </main>
   )
