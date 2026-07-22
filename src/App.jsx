@@ -4,6 +4,7 @@ import SearchBar from "./components/SearchBar"
 import ProductTable from "./components/ProductTable"
 import InventorySummary from "./components/InventorySummary"
 import StatusFilter from "./components/StatusFilter"
+import SortControl from './components/SortControl'
 
 import { getInventoryStatus } from "./utils/inventoryStatus"
 import { products } from "./data/products"
@@ -11,6 +12,7 @@ import { products } from "./data/products"
 function App() {
   const [searchValue, setSearchValue] = useState("")
   const [selectedStatus, setSelectedStatus] = useState("all")
+  const [sortValue, setSortValue] = useState("default")
 
   const hasActiveFilters = searchValue.trim() !== "" || selectedStatus !== "all"
 
@@ -37,6 +39,34 @@ function App() {
         return matchesSearch && matchesStatus
     })
   }, [searchValue, selectedStatus])
+
+  const sortedProducts = useMemo(() => {
+    const productsToSort = [...filteredProducts]
+
+    switch(sortValue) {
+      case "title":
+        return productsToSort.sort((a, b) =>
+          a.title.localeCompare(b.title)
+        )
+      
+      case "brand":
+        return productsToSort.sort((a, b) => 
+          a.brand.localeCompare(b.brand)
+        )
+
+      case "price":
+        return productToSort.sort((a, b) => a.price - b.price)
+
+      case "stock":
+        return productsToSort.sort((a, b) => 
+          a.stockQuantity - b.stockQuantity
+        )
+      
+      default:
+        return productsToSort
+    }
+
+  }, [filteredProducts, sortValue])
 
   const inventorySummary = useMemo(() => {
     return filteredProducts.reduce(
