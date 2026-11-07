@@ -13,6 +13,7 @@ function App() {
   const [searchValue, setSearchValue] = useState("")
   const [selectedStatus, setSelectedStatus] = useState("all")
   const [sortValue, setSortValue] = useState("default")
+  const [sortDirection, setSortDirection] = useState("asc")
 
   const hasActiveFilters = searchValue.trim() !== "" || selectedStatus !== "all"
 
@@ -43,30 +44,40 @@ function App() {
   const sortedProducts = useMemo(() => {
     const productsToSort = [...filteredProducts]
 
-    switch(sortValue) {
-      case "title":
-        return productsToSort.sort((a, b) =>
-          a.title.localeCompare(b.title)
-        )
-      
-      case "brand":
-        return productsToSort.sort((a, b) => 
-          a.brand.localeCompare(b.brand)
-        )
-
-      case "price":
-        return productToSort.sort((a, b) => a.price - b.price)
-
-      case "stock":
-        return productsToSort.sort((a, b) => 
-          a.stockQuantity - b.stockQuantity
-        )
-      
-      default:
-        return productsToSort
+    if (sortValue === "default") {
+      return productsToSort  
     }
 
-  }, [filteredProducts, sortValue])
+    productsToSort.sort((a, b) => {
+      let comparison = 0
+
+      switch(sortValue) {
+        case "title":
+          comparison = a.title.localeCompare(b.title)
+          break
+        
+        case "brand":
+          comparison = a.brand.localeCompare(b.brand)
+          break
+  
+        case "price":
+          comparison = a.price - b.price
+          break
+  
+        case "stock":
+          comparison = a.stockQuantity - b.stockQuantity
+          break
+        
+        default:
+          comparison = 0
+      }
+
+      return sortDirection === "asc" ? comparison : -comparison
+    })
+
+    return productsToSort
+
+  }, [filteredProducts, sortValue, sortDirection])
 
   const inventorySummary = useMemo(() => {
     return filteredProducts.reduce(
@@ -120,7 +131,14 @@ function App() {
               Clear filters
             </button>
           ) }
-        </div>        
+        </div>     
+
+        <SortControl
+          sortValue={sortValue}   
+          sortDirection={sortDirection}
+          onSortChange={setSortValue}
+          onDirectionChange={setSortDirection}
+        />
 
         <div className='dashboard__count' aria-label='Visible product count'>
           <span>{filteredProducts.length} </span>
@@ -130,7 +148,7 @@ function App() {
         </div>
 
         <ProductTable 
-          products={filteredProducts} 
+          products={sortedProducts} 
           hasActiveFilters={hasActiveFilters}
           onClearFilters={handleClearFilters}  
         />

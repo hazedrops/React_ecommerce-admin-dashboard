@@ -231,6 +231,82 @@ input {
   outline-offset: 2px;
 }
 
+/* Product sorting */
+.sort-control {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.sort-control__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sort-control__label {
+  color: #475569;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.sort-control__select {
+  min-width: 190px;
+  padding: 0.7rem 0.9rem;
+  background-color: #ffffff;
+  color: #172026;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.sort-control__select:hover:not(:disabled) {
+  border-color: #94a3b8;
+  background-color: #f8fafc;
+}
+
+.sort-control__select:focus-visible {
+  border-color: #2563eb;
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 15%);
+}
+
+.sort-control__select:disabled {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.sort-control__select:hover {
+  border-color: #94a3b8;
+  background-color: #f8fafc;
+}
+
+.sort-control__select:focus {
+  border-color: #2563eb;
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 15%);
+}
+
+@media (max-width: 599px) {
+  .sort-control {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+
+  .sort-control__select {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
 /* Product Table */
 .table-wrapper {
   overflow-x: auto;
@@ -357,6 +433,7 @@ input {
   outline-offset: 3px;
 }
 
+/* Tablet and mobile */
 @media (max-width: 720px) {
   .app {
     padding: 1.25rem 0.75rem;
@@ -364,10 +441,6 @@ input {
 
   .dashboard {
     padding: 1.25rem;
-  }
-
-  .dashboard__header {
-    flex-direction: column;
   }
 
   .dashboard__count {
@@ -380,7 +453,6 @@ input {
   }
 
   .filter-toolbar {
-    display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 1rem;
@@ -404,10 +476,26 @@ input {
 
   .clear-filters-button {
     align-self: flex-end;
-    margin: 0 0 1em 0;
+    margin: 0 0 1rem;
+  }
+
+  .sort-control {
+    flex-direction: column;
+    align-items: stretch;
+    /* gap: 0.4rem; */
+  }
+
+  .sort-control__field {
+    width: 100%;
+  }
+
+  .sort-control__select {
+    width: 100%;
+    min-width: 0;
   }
 }
 
+/* Narrow mobile */
 @media (max-width: 520px) {
   .inventory-summary {
     grid-template-columns: 1fr;
