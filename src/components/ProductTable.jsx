@@ -1,6 +1,6 @@
-import ProductRow from "./ProductRow"
+import ProductRow from './ProductRow'
 
-function ProductTable({ products, hasActiveFilters, onClearFilters }) {
+function ProductTable({ products, hasActiveFilters, onClearFilters, onSort }) {
   if (products.length === 0) {
     return (
       <div className='empty-state' role='status'>
@@ -30,11 +30,43 @@ function ProductTable({ products, hasActiveFilters, onClearFilters }) {
 
         <thead>
           <tr>
-            <th scope='col'>Product</th>
+            <th scope='col'>
+              <button
+                type='button'
+                className='table-sort-button'
+                onClick={() => onSort('title')}
+              >
+                Product
+              </button>
+            </th>
             <th scope='col'>SKU</th>
-            <th scope='col'>Brand</th>
-            <th scope='col'>Price</th>
-            <th scope='col'>Stock</th>
+            <th scope='col'>
+              <button
+                type='button'
+                className='table-sort-button'
+                onClick={() => onSort('brand')}
+              >
+                Brand
+              </button>
+            </th>
+            <th scope='col'>
+              <button
+                type='button'
+                className='table-sort-button'
+                onClick={() => onSort('price')}
+              >
+                Price
+              </button>
+            </th>
+            <th scope='col'>
+              <button
+                type='button'
+                className='table-sort-button'
+                onClick={() => onSort('stock')}
+              >
+                Stock
+              </button>
+            </th>
             <th scope='col'>Status</th>
           </tr>
         </thead>

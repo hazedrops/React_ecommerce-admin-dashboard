@@ -22,6 +22,17 @@ function App() {
     setSelectedStatus("all")
   }
 
+  function handleSort(field) {
+    if(sortValue === field) {
+      setSortDirection((currentDirection) => 
+        currentDirection === "asc" ? "desc" : "asc"
+      )
+    } else {
+      setSortValue(field)
+      setSortDirection("asc")
+    }
+  }
+
   const filteredProducts = useMemo(() => {
     const normalizedSearch = searchValue.trim().toLowerCase()
     
@@ -150,7 +161,8 @@ function App() {
         <ProductTable 
           products={sortedProducts} 
           hasActiveFilters={hasActiveFilters}
-          onClearFilters={handleClearFilters}  
+          onClearFilters={handleClearFilters} 
+          onSort={handleSort} 
         />
       </section>
     </main>
