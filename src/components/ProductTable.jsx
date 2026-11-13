@@ -1,6 +1,13 @@
 import ProductRow from './ProductRow'
 
-function ProductTable({ products, hasActiveFilters, onClearFilters, onSort }) {
+function ProductTable({
+  products,
+  hasActiveFilters,
+  onClearFilters,
+  onSort,
+  sortValue,
+  sortDirection,
+}) {
   if (products.length === 0) {
     return (
       <div className='empty-state' role='status'>
@@ -30,41 +37,100 @@ function ProductTable({ products, hasActiveFilters, onClearFilters, onSort }) {
 
         <thead>
           <tr>
-            <th scope='col'>
+            <th
+              scope='col'
+              aria-sort={
+                sortValue === 'title'
+                  ? sortDirection === 'asc'
+                    ? 'ascending'
+                    : 'descending'
+                  : undefined
+              }
+            >
               <button
                 type='button'
                 className='table-sort-button'
                 onClick={() => onSort('title')}
               >
                 Product
+                {sortValue === 'title' && (
+                  <span className='table-sort-icon' aria-hidden='true'>
+                    {sortDirection === 'asc' ? ' \u2191' : ' \u2193'}
+                  </span>
+                )}
               </button>
             </th>
+
             <th scope='col'>SKU</th>
-            <th scope='col'>
+            <th
+              scope='col'
+              aria-sort={
+                sortValue === 'brand'
+                  ? sortDirection === 'asc'
+                    ? 'ascending'
+                    : 'descending'
+                  : undefined
+              }
+            >
               <button
                 type='button'
                 className='table-sort-button'
                 onClick={() => onSort('brand')}
               >
                 Brand
+                {sortValue === 'brand' && (
+                  <span className='table-sort-icon' aria-hidden='true'>
+                    {sortDirection === 'asc' ? ' \u2191' : ' \u2193'}
+                  </span>
+                )}
               </button>
             </th>
-            <th scope='col'>
+
+            <th
+              scope='col'
+              aria-sort={
+                sortValue === 'price'
+                  ? sortDirection === 'asc'
+                    ? 'ascending'
+                    : 'descending'
+                  : undefined
+              }
+            >
               <button
                 type='button'
                 className='table-sort-button'
                 onClick={() => onSort('price')}
               >
                 Price
+                {sortValue === 'price' && (
+                  <span className='table-sort-icon' aria-hidden='true'>
+                    {sortDirection === 'asc' ? ' \u2191' : ' \u2193'}
+                  </span>
+                )}
               </button>
             </th>
-            <th scope='col'>
+
+            <th
+              scope='col'
+              aria-sort={
+                sortValue === 'stock'
+                  ? sortDirection === 'asc'
+                    ? 'ascending'
+                    : 'descending'
+                  : undefined
+              }
+            >
               <button
                 type='button'
                 className='table-sort-button'
                 onClick={() => onSort('stock')}
               >
                 Stock
+                {sortValue === 'stock' && (
+                  <span className='table-sort-icon' aria-hidden='true'>
+                    {sortDirection === 'asc' ? ' \u2191' : ' \u2193'}
+                  </span>
+                )}
               </button>
             </th>
             <th scope='col'>Status</th>

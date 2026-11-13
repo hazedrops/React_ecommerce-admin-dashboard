@@ -163,6 +163,8 @@ function App() {
           hasActiveFilters={hasActiveFilters}
           onClearFilters={handleClearFilters} 
           onSort={handleSort} 
+          sortValue={sortValue}
+          sortDirection={sortDirection}
         />
       </section>
     </main>

@@ -342,6 +342,7 @@ input {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  min-width: 7em;
 }
 
 .product-table tbody tr:last-child td {
