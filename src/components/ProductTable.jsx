@@ -55,7 +55,7 @@ function ProductTable({
                 Product
                 {sortValue === 'title' && (
                   <span className='table-sort-icon' aria-hidden='true'>
-                    {sortDirection === 'asc' ? ' \u2191' : ' \u2193'}
+                    {sortDirection === 'asc' ? '\u2191' : '\u2193'}
                   </span>
                 )}
               </button>

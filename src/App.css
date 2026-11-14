@@ -434,6 +434,43 @@ input {
   outline-offset: 3px;
 }
 
+.table-sort-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2rem;
+  padding: 0.25rem 0;
+  border: 0;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.table-sort-button:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.table-sort-button:focus-visible {
+  outline: 2px solid red;
+  outline-offset: 4px;
+}
+
+.product-table th[aria-sort] .table-sort-button {
+  color: #1d4ed8;
+}
+
+.table-sort-icon {
+  font-size: 1rem;
+  line-height: .9;
+}
+
 /* Tablet and mobile */
 @media (max-width: 720px) {
   .app {
