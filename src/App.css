@@ -231,7 +231,7 @@ input {
   outline-offset: 2px;
 }
 
-/* Product sorting */
+/* Product sorting
 .sort-control {
   display: flex;
   align-items: flex-end;
@@ -292,9 +292,9 @@ input {
   border-color: #2563eb;
   outline: none;
   box-shadow: 0 0 0 3px rgb(37 99 235 / 15%);
-}
+} */
 
-@media (max-width: 599px) {
+/* @media (max-width: 599px) {
   .sort-control {
     flex-direction: column;
     align-items: stretch;
@@ -305,6 +305,32 @@ input {
     width: 100%;
     min-width: 0;
   }
+} */
+/* Reset sort button */
+.reset-sort-button {
+  display: block;
+  margin: 1rem 0 1rem auto;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  color: #475569;
+  font: inherit;
+  cursor: pointer;
+}
+
+.reset-sort-button:hover:not(:disabled) {
+  background: #f1f5f9;
+}
+
+.reset-sort-button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+}
+
+.reset-sort-button:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
 /* Product Table */
@@ -458,8 +484,8 @@ input {
 }
 
 .table-sort-button:focus-visible {
-  outline: 2px solid red;
-  outline-offset: 4px;
+  outline: 2px solid #2563eb;
+  outline-offset: 10px;
 }
 
 .product-table th[aria-sort] .table-sort-button {

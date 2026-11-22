@@ -4,7 +4,7 @@ import SearchBar from "./components/SearchBar"
 import ProductTable from "./components/ProductTable"
 import InventorySummary from "./components/InventorySummary"
 import StatusFilter from "./components/StatusFilter"
-import SortControl from './components/SortControl'
+// import SortControl from './components/SortControl'
 
 import { getInventoryStatus } from "./utils/inventoryStatus"
 import { products } from "./data/products"
@@ -31,6 +31,11 @@ function App() {
       setSortValue(field)
       setSortDirection("asc")
     }
+  }
+
+  function handleResetSort() {
+    setSortValue("default")
+    setSortDirection("asc")
   }
 
   const filteredProducts = useMemo(() => {
@@ -144,12 +149,21 @@ function App() {
           ) }
         </div>     
 
-        <SortControl
+        {/* <SortControl
           sortValue={sortValue}   
           sortDirection={sortDirection}
           onSortChange={setSortValue}
           onDirectionChange={setSortDirection}
-        />
+        /> */}
+        <button 
+          type='button'
+          className='reset-sort-button'
+          onClick={handleResetSort}
+          disabled={sortValue === "default"}
+        >
+          Reset sort  
+        </button>
+
 
         <div className='dashboard__count' aria-label='Visible product count'>
           <span>{filteredProducts.length} </span>
