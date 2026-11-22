@@ -231,7 +231,7 @@ input {
   outline-offset: 2px;
 }
 
-/* Product sorting */
+/* Product sorting
 .sort-control {
   display: flex;
   align-items: flex-end;
@@ -292,9 +292,9 @@ input {
   border-color: #2563eb;
   outline: none;
   box-shadow: 0 0 0 3px rgb(37 99 235 / 15%);
-}
+} */
 
-@media (max-width: 599px) {
+/* @media (max-width: 599px) {
   .sort-control {
     flex-direction: column;
     align-items: stretch;
@@ -305,6 +305,32 @@ input {
     width: 100%;
     min-width: 0;
   }
+} */
+/* Reset sort button */
+.reset-sort-button {
+  display: block;
+  margin: 1rem 0 1rem auto;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  color: #475569;
+  font: inherit;
+  cursor: pointer;
+}
+
+.reset-sort-button:hover:not(:disabled) {
+  background: #f1f5f9;
+}
+
+.reset-sort-button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+}
+
+.reset-sort-button:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
 /* Product Table */
@@ -342,6 +368,7 @@ input {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  min-width: 7em;
 }
 
 .product-table tbody tr:last-child td {
@@ -431,6 +458,43 @@ input {
 .empty-state__button:focus-visible {
   outline: 3px solid rgba(37, 99, 235, 0.25);
   outline-offset: 3px;
+}
+
+.table-sort-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2rem;
+  padding: 0.25rem 0;
+  border: 0;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.table-sort-button:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.table-sort-button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 10px;
+}
+
+.product-table th[aria-sort] .table-sort-button {
+  color: #1d4ed8;
+}
+
+.table-sort-icon {
+  font-size: 1rem;
+  line-height: .9;
 }
 
 /* Tablet and mobile */
